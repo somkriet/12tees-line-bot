@@ -1,2 +1,4 @@
-<?php
-echo "Hello 12tees LINE BOT";
+<?php 
+ /*Return HTTP Request 200*/
+ http_response_code(200);
+?>
