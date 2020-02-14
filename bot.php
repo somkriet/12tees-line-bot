@@ -8,7 +8,11 @@ error_reporting(E_ALL);
 // require_once '/vendor/autoload.php';
  
 // การตั้งเกี่ยวกับ bot
-require_once 'bot_setting.php';
+// require_once 'bot_setting.php';
+
+define('LINE_MESSAGE_CHANNEL_ID','1610672007');
+define('LINE_MESSAGE_CHANNEL_SECRET','01105a9432439cd39fe7d25592baf0e4');
+define('LINE_MESSAGE_ACCESS_TOKEN','h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU=');
  
 // กรณีมีการเชื่อมต่อกับฐานข้อมูล
 //require_once("dbconnect.php");
