@@ -1,5 +1,6 @@
 <?php
-
+/*Return HTTP Request 200*/
+ http_response_code(200);
 
 $API_URL = 'https://api.line.me/v2/bot/message';
 $ACCESS_TOKEN = 'h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU='; 
