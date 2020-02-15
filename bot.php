@@ -38,7 +38,7 @@ if ( sizeof($request_array['events']) > 0 ) {
    }
 }
 echo "OK";
-echo "Result: ".$send_result."\r\n";
+
 
 
 // if ( sizeof($request_array['events']) > 0 ) {
