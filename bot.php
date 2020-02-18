@@ -18,20 +18,30 @@ $request_array = json_decode($request, true);   // แปลงข้อคว�
 // {"userId":"Ue27997d1463e20a2dc0928e050c337fe","type":"user"
 
 if ( sizeof($request_array['events']) > 0 ) {
-      foreach ($request_array['events'] as $event) {
+
+        $replyToken = $request_array['events'][0]['replyToken'];
+        $userID = $request_array['events'][0]['source']['userId'];
+        $sourceType = $request_array['events'][0]['source']['type'];
+
+
+
+
+        foreach ($request_array['events'] as $event) {
       
-      $reply_message = '';
-      $reply_token = $event['replyToken'];
-      $data = [
-         'replyToken' => $reply_token,
-         'messages' => [
-            ['type' => 'text','text' => json_encode($request_array)]
-         ]
-      ];
-      $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      echo "Result: ".$send_result."\r\n";
-   }
+          $reply_message = '';
+          $reply_token = $event['replyToken'];
+          $data = [
+             'replyToken' => $reply_token,
+             'messages' => [
+                // ['type' => 'text','text' => json_encode($request_array)]
+                 ['type' => 'text','text' => json_encode($userID)]
+             ]
+          ];
+
+          $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+          echo "Result: ".$send_result."\r\n";
+        }
 }
 echo "OK";
 
