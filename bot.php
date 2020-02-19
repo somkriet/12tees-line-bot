@@ -23,7 +23,7 @@ if ( sizeof($request_array['events']) > 0 ) {
         $userID = $request_array['events'][0]['source']['userId'];
         $sourceType = $request_array['events'][0]['source']['type'];
 
-
+        $test = 'ทดสอบระบบline';
 
 
         foreach ($request_array['events'] as $event) {
@@ -34,7 +34,7 @@ if ( sizeof($request_array['events']) > 0 ) {
              'replyToken' => $reply_token,
              'messages' => [
                 // ['type' => 'text','text' => json_encode($request_array)]
-                 ['type' => 'text','text' => json_encode($userID)]
+                 ['type' => 'text','text' => json_encode($test)]
              ]
           ];
 
