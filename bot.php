@@ -46,7 +46,18 @@ if ( sizeof($request_array['events']) > 0 ) {
             //     $reply_message = json_encode($request_array);
             // break; 
 
-            if ($sourceType == 'text') {
+
+            // $data = [
+            //  'replyToken' => $reply_token,
+            //  'messages' => [
+            //     // ['type' => 'text','text' => json_encode($request_array)]
+            //      ['type' => 'text','text' => $reply_message]
+            //  ]
+            // ];
+
+            // }
+
+           if ($sourceType == 'text') {
 
                 if ($userMessage == 'A') {
 
@@ -58,7 +69,7 @@ if ( sizeof($request_array['events']) > 0 ) {
                     $reply_message = "คุณพิมพ์ B";
 
                 }else{
-                    
+
                     $reply_message = "คุณไม่ได้พิมพ์ A และ B";
                 }
            
@@ -67,24 +78,13 @@ if ( sizeof($request_array['events']) > 0 ) {
             }
 
 
-            $data = [
+          $data = [
              'replyToken' => $reply_token,
              'messages' => [
                 // ['type' => 'text','text' => json_encode($request_array)]
                  ['type' => 'text','text' => $reply_message]
              ]
-            ];
-
-            }
-
-
-          // $data = [
-          //    'replyToken' => $reply_token,
-          //    'messages' => [
-          //       // ['type' => 'text','text' => json_encode($request_array)]
-          //        ['type' => 'text','text' => $reply_message]
-          //    ]
-          // ];
+          ];
 
           // $post_body = json_encode($textReplyMessage, JSON_UNESCAPED_UNICODE);
           $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
