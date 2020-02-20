@@ -23,10 +23,18 @@ if ( sizeof($request_array['events']) > 0 ) {
         $userID = $request_array['events'][0]['source']['userId'];
         $sourceType = $request_array['events'][0]['source']['type'];
 
-        $test = 'ทดสอบระบบline';
+        
 
 
         foreach ($request_array['events'] as $event) {
+
+
+            if ($event = 'test' ) {
+                # code...
+                $test = 'ทดสอบระบบline001';
+            }else{
+                $test = 'ทดสอบระบบline002';
+            }
       
           $reply_message = '';
           $reply_token = $event['replyToken'];
