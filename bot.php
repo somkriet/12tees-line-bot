@@ -19,8 +19,8 @@ $pass = 'ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902';
 $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
 // Database
 
-// $db = parse_url(getenv("postgres://nusytfwxzbezmo:f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831@ec2-3-229-210-93.compute-1.amazonaws.com:5432/d97j1dos9pi7gj"));
-// $db["path"] = ltrim($db["path"], "/");
+$db = parse_url(getenv("postgres://vymkgetnrcudai:ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902@ec2-3-229-210-93.compute-1.amazonaws.com:5432/dbud41ic7prd1b"));
+$db["db"] = ltrim($db["db"], "/");
 
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $channel_token); // เชื่อมต่อกับ LINE Messaging API
 
