@@ -38,23 +38,34 @@ if ( sizeof($request_array['events']) > 0 ) {
                         $reply_message = "คุณพิมพ์ B";
                     break;
                 default:
-                    $reply_message = " คุณไม่ได้พิมพ์ A และ B";
+                    $reply_message = "คุณไม่ได้พิมพ์ A และ B";
                     break;                                      
             }
             break;
             default:
             $reply_message = json_encode($events);
-            break; 
-        }
 
 
-          $data = [
+
+            $data = [
              'replyToken' => $reply_token,
              'messages' => [
                 // ['type' => 'text','text' => json_encode($request_array)]
                  ['type' => 'text','text' => $reply_message]
              ]
           ];
+
+            break; 
+        }
+
+
+          // $data = [
+          //    'replyToken' => $reply_token,
+          //    'messages' => [
+          //       // ['type' => 'text','text' => json_encode($request_array)]
+          //        ['type' => 'text','text' => $reply_message]
+          //    ]
+          // ];
 
           // $post_body = json_encode($textReplyMessage, JSON_UNESCAPED_UNICODE);
           $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
