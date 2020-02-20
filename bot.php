@@ -1,15 +1,25 @@
 <?php
 
+require_once('./vendor/autoload.php');
+
 $API_URL = 'https://api.line.me/v2/bot/message';
 
-$ACCESS_TOKEN = 'h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU='; 
+$channel_token = 'h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU='; 
 
 $channelSecret = '01105a9432439cd39fe7d25592baf0e4';
 
 // การตั้งเกี่ยวกับ bot
 // require_once 'bot_setting.php';
 
-$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN); // เชื่อมต่อกับ LINE Messaging API
+// Database
+// $host = 'ec2-3-229-210-93.compute-1.amazonaws.com';
+// $dbname = 'd97j1dos9pi7gj';
+// $user = 'nusytfwxzbezmo';
+// $pass = 'f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831';
+// $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+// Database
+
+$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $channel_token); // เชื่อมต่อกับ LINE Messaging API
 
 $request = file_get_contents('php://input');   // คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 $request_array = json_decode($request, true);   // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
@@ -17,53 +27,85 @@ $request_array = json_decode($request, true);   // แปลงข้อคว�
 
 // {"userId":"Ue27997d1463e20a2dc0928e050c337fe","type":"user"
 
-if ( sizeof($request_array['events']) > 0 ) {
+// if ( sizeof($request_array['events']) > 0 ) {
 
-        $replyToken = $request_array['events'][0]['replyToken'];
-        $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
-        $sourceType = $request_array['events'][0]['source']['type']; //ชนิดของข้อมูล 
-        $userMessage = $request_array['events'][0]['message']['text'];
+//         $replyToken = $request_array['events'][0]['replyToken'];
+//         $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
+//         $sourceType = $request_array['events'][0]['source']['type']; //ชนิดของข้อมูล 
+//         $userMessage = $request_array['events'][0]['message']['text'];
         
-        foreach ($request_array['events'] as $event) {
-          // $reply_message = 'ทดสอบ';
-          $reply_token = $event['replyToken'];
+//         foreach ($request_array['events'] as $event) {
+//           // $reply_message = 'ทดสอบ';
+//           $reply_token = $event['replyToken'];
 
 
-           if ($sourceType = 'text') {
+//            if ($sourceType = 'text') {
 
-                if ($userMessage = 'A') {
+//                 if ($userMessage = 'A') {
 
-                    $reply_message = "คุณพิมพ์ A";
+//                     $reply_message = "คุณพิมพ์ A";
 
-                }
-                elseif($userMessage = 'B'){
+//                 }
+//                 elseif($userMessage = 'B'){
 
-                    $reply_message = "คุณพิมพ์ B";
+//                     $reply_message = "คุณพิมพ์ B";
 
-                }else{
+//                 }else{
 
-                    $reply_message = "คุณไม่ได้พิมพ์ A และ B";
-                }
+//                     $reply_message = "คุณไม่ได้พิมพ์ A และ B";
+//                 }
            
-            }else{
-                $reply_message = json_encode($request_array);
-            }
+//             }else{
+//                 $reply_message = json_encode($request_array);
+//             }
 
 
-          $data = [
-             'replyToken' => $reply_token,
-             'messages' => [
-                // ['type' => 'text','text' => json_encode($request_array)]
-                 ['type' => 'text','text' => $reply_message]
-             ]
-          ];
+//           $data = [
+//              'replyToken' => $reply_token,
+//              'messages' => [
+//                 // ['type' => 'text','text' => json_encode($request_array)]
+//                  ['type' => 'text','text' => $reply_message]
+//              ]
+//           ];
 
-          // $post_body = json_encode($textReplyMessage, JSON_UNESCAPED_UNICODE);
-          $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-          echo "Result: ".$send_result."\r\n";
+//           // $post_body = json_encode($textReplyMessage, JSON_UNESCAPED_UNICODE);
+//           $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+//           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+//           echo "Result: ".$send_result."\r\n";
+//         }
+// }
+// echo "OK";
+
+
+if (!is_null($request_array['events'])) {
+
+    // Loop through each event
+    foreach ($request_array['events'] as $event) {
+
+                // Line API send a lot of event type, we interested in message only.
+        if ($event['type'] == 'message') {
+
+                        switch($event['message']['type']) {
+
+                            case 'text':
+                                // Get replyToken
+                                $replyToken = $event['replyToken'];
+
+                                // Reply message
+                                $respMessage = 'Hello, your message is '. $event['message']['text'];
+
+                                $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channel_token);
+                                $bot = new \LINE\LINEBot($httpClient, array('channelSecret' => $channelSecret));
+
+                                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($respMessage);
+                                $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+
+                                break;
+                        }
         }
+    }
 }
+
 echo "OK";
 
 
@@ -83,48 +125,4 @@ function send_reply_message($url, $post_header, $post_body)
 } 
 
 
-//  $accessToken = "h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU=";//copy ข้อความ Channel access token ตอนที่ตั้งค่า
-// $content = file_get_contents('php://input');
-//    $arrayJson = json_decode($content, true);
-// $arrayHeader = array();
-//    $arrayHeader[] = "Content-Type: application/json";
-//    $arrayHeader[] = "Authorization: Bearer {$accessToken}";
-// //รับข้อความจากผู้ใช้
-//    $message = $arrayJson['events'][0]['message']['text'];
-// //รับ id ว่ามาจากไหน
-//    if(isset($arrayJson['events'][0]['source']['userId']){
-//       $id = $arrayJson['events'][0]['source']['userId'];
-//    }
-//    else if(isset($arrayJson['events'][0]['source']['groupId'])){
-//       $id = $arrayJson['events'][0]['source']['groupId'];
-//    }
-//    else if(isset($arrayJson['events'][0]['source']['room'])){
-//       $id = $arrayJson['events'][0]['source']['room'];
-//    }
-// #ตัวอย่าง Message Type "Text + Sticker"
-//    if($message == "สวัสดี"){
-//       $arrayPostData['to'] = $id;
-//       $arrayPostData['messages'][0]['type'] = "text";
-//       $arrayPostData['messages'][0]['text'] = "สวัสดีจ้าาา";
-//       $arrayPostData['messages'][1]['type'] = "sticker";
-//       $arrayPostData['messages'][1]['packageId'] = "2";
-//       $arrayPostData['messages'][1]['stickerId'] = "34";
-//       pushMsg($arrayHeader,$arrayPostData);
-//    }
-// function pushMsg($arrayHeader,$arrayPostData){
-//       $strUrl = "https://api.line.me/v2/bot/message/push";
-// $ch = curl_init();
-//       curl_setopt($ch, CURLOPT_URL,$strUrl);
-//       curl_setopt($ch, CURLOPT_HEADER, false);
-//       curl_setopt($ch, CURLOPT_POST, true);
-//       curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
-//       curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
-//       curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-//       curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//       $result = curl_exec($ch);
-//       curl_close ($ch);
-//    }
-
-
-// exit;
 ?>
