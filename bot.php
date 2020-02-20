@@ -3,7 +3,6 @@
 require_once('./vendor/autoload.php');
 
 $API_URL = 'https://api.line.me/v2/bot/message';
-// $url_content=”https://api.line.me/v2/bot/message/”.$msg_id.”/content”;
 
 $channel_token = 'h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU='; 
 
@@ -96,7 +95,7 @@ if (sizeof($request_array['events']) > 0 ) {
 
                                
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-                                $send_result = send_reply_message_img($API_URL.'/reply', $POST_HEADER, $post_body,$userID);
+                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                                 echo "Result: ".$send_result."\r\n";
 
                             break;
@@ -230,26 +229,27 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 } 
 
-function send_reply_message_img($url, $post_header, $post_body,$msg_id)
-{
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    
-    $fp = 'botdata/'.$msg_id.'.png';
-    $url_img="http://103.40.151.6/line_bot_gts_issue/".$fp;
-    file_put_contents( $fp, $data );
+// function send_reply_message_img($url, $post_header, $post_body,$msg_id)
+// {
+//     $ch = curl_init($url);
+//     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+//     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+//     $result = curl_exec($ch);
+//     curl_close($ch);
 
-//     $fp = ‘img_file/’.$msg_id.’.png’;
-// $url_img=”http://103.40.151.6/line_bot_gts_issue/”.$fp;
-// file_put_contents( $fp, $data );
+//     $fp = 'botdata/'.$msg_id.'.png';
+//     $url_img="http://103.40.151.6/line_bot_gts_issue/".$fp;
+//     file_put_contents( $fp, $data );
 
-    return $result;
-} 
+// //     $fp = ‘img_file/’.$msg_id.’.png’;
+// // $url_img=”http://103.40.151.6/line_bot_gts_issue/”.$fp;
+// // file_put_contents( $fp, $data );
+
+//     return $result;
+// } 
+
 
 ?>
