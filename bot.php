@@ -3,6 +3,7 @@
 require_once('./vendor/autoload.php');
 
 $API_URL = 'https://api.line.me/v2/bot/message';
+// $url_content=”https://api.line.me/v2/bot/message/”.$msg_id.”/content”;
 
 $channel_token = 'h1ARwRRaXW+UeDXnvBxitQFP8KHRcMYouyCUNDrqmhUf+lLJzkXAG40V8F+Ra/nU+wFFtA64j3koPGqsQhZLBvg+KYNCrMiVOzjJlVxkzX0Nmeoj6Gr4F314Zz3pabxWIvVKuJdK+Kk6z2k3jZIfoQdB04t89/1O/w1cDnyilFU='; 
 
@@ -24,14 +25,14 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input');   // คำสั่งรอรับการส่งค่ามาของ LINE Messaging API
 $request_array = json_decode($request, true);   // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 
-
+// $fileType = $response->getHeader('Content-Type');  
 if (sizeof($request_array['events']) > 0 ) {
 
         $replyToken = $request_array['events'][0]['replyToken'];
         $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
         $sourceType = $request_array['events'][0]['source']['type']; //ชนิดของข้อมูล 
         $userMessage = $request_array['events'][0]['message']['text']; //ข้อความของ user ที่ส่งเข้ามา
-        
+
         foreach ($request_array['events'] as $event) {
      
             if ($event['type'] == 'message') {//ตรวจสอบว่า event ที่userส่งมาเป็น type อะไร
@@ -39,6 +40,7 @@ if (sizeof($request_array['events']) > 0 ) {
                         switch($event['message']['type']) {//ตรวจสอบ ข้อความที่ส่งมา
 
                             case 'text':
+                                $messageID = $event['message']['id'];
                                 // Get replyToken
                                 $reply_token = $event['replyToken'];
 
@@ -60,6 +62,7 @@ if (sizeof($request_array['events']) > 0 ) {
 
                             break;
                             case 'image':
+                                $messageID = $event['message']['id'];
                                 // Get replyToken
                                 $reply_token = $event['replyToken'];
 
@@ -74,13 +77,31 @@ if (sizeof($request_array['events']) > 0 ) {
                                      ]
                                   ];
 
+                                // list($typeFile,$ext) = explode("/",'image');
+                                // $ext = ($ext=='jpeg' || $ext=='jpg')?"jpg":$ext;
+                                // $fileNameSave = time().".".$ext;
+
+
+                                // $botDataFolder = 'botdata/'; // โฟลเดอร์หลักที่จะบันทึกไฟล์
+                                // $botDataUserFolder = $botDataFolder.$userID; // มีโฟลเดอร์ด้านในเป็น userId อีกขั้น
+                                // if(!file_exists($botDataUserFolder)) { // ตรวจสอบถ้ายังไม่มีให้สร้างโฟลเดอร์ userId
+                                //     mkdir($botDataUserFolder, 0777, true);
+                                // }   
+
+                                // // กำหนด path ของไฟล์ที่จะบันทึก
+                                // $fileFullSavePath = $botDataUserFolder.'/'.$fileNameSave;
+                                // file_put_contents($fileFullSavePath,$dataBinary); // ทำการบันทึกไฟล์
+                                // $textReplyMessage = "บันทึกไฟล์เรียบร้อยแล้ว $fileNameSave";
+                                // $replyData = new TextMessageBuilder($textReplyMessage);
+
                                
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                                $send_result = send_reply_message_img($API_URL.'/reply', $POST_HEADER, $post_body,$userID);
                                 echo "Result: ".$send_result."\r\n";
 
                             break;
                             case 'sticker':
+                                $messageID = $event['message']['id'];
                                 // Get replyToken
                                 $reply_token = $event['replyToken'];
 
@@ -102,6 +123,8 @@ if (sizeof($request_array['events']) > 0 ) {
 
                             break;
                             case 'audio':
+
+                                $messageID = $event['message']['id'];
                                 // Get replyToken
                                 $reply_token = $event['replyToken'];
 
@@ -123,11 +146,13 @@ if (sizeof($request_array['events']) > 0 ) {
 
                             break;
                             case 'video':
+
+                                $messageID = $event['message']['id'];
                                 // Get replyToken
                                 $reply_token = $event['replyToken'];
 
                                 // Reply message
-                                $respMessage = 'Hello, your message is '. 'video';
+                                $respMessage = 'Hello, your message is '. $messageID;
 
                                 $data = [
                                      'replyToken' => $reply_token,
@@ -205,5 +230,26 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 } 
 
+function send_reply_message_img($url, $post_header, $post_body,$msg_id)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    
+    $fp = 'botdata/'.$msg_id.'.png';
+    $url_img="http://103.40.151.6/line_bot_gts_issue/".$fp;
+    file_put_contents( $fp, $data );
+
+//     $fp = ‘img_file/’.$msg_id.’.png’;
+// $url_img=”http://103.40.151.6/line_bot_gts_issue/”.$fp;
+// file_put_contents( $fp, $data );
+
+    return $result;
+} 
 
 ?>
