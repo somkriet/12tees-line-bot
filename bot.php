@@ -80,6 +80,9 @@ if (sizeof($request_array['events']) > 0 ) {
                                 echo "Result: ".$send_result."\r\n";
 
                             break;
+
+                        }
+                        break;
                         default:
                             $respMessage = " คุณไม่ได้พิมพ์ ค่า ตามที่กำหนด";
 
@@ -101,7 +104,7 @@ if (sizeof($request_array['events']) > 0 ) {
                         //     $textReplyMessage = json_encode($events);
                         //     $replyData = new TextMessageBuilder($textReplyMessage);         
                         // break;  
-                        }
+                        // }
             }
 
         }
