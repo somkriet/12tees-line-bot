@@ -44,7 +44,7 @@ if ( sizeof($request_array['events']) > 0 ) {
             break;
             default:
             $reply_message = json_encode($request_array);
-
+            break; 
 
 
             $data = [
@@ -53,10 +53,9 @@ if ( sizeof($request_array['events']) > 0 ) {
                 // ['type' => 'text','text' => json_encode($request_array)]
                  ['type' => 'text','text' => $reply_message]
              ]
-          ];
+            ];
 
-            break; 
-        }
+            }
 
 
           // $data = [
