@@ -13,9 +13,9 @@ $channelSecret = '01105a9432439cd39fe7d25592baf0e4';
 
 // Database
 $host = 'ec2-3-229-210-93.compute-1.amazonaws.com';
-$dbname = 'd97j1dos9pi7gj';
-$user = 'nusytfwxzbezmo';
-$pass = 'f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831';
+$dbname = 'dbud41ic7prd1b';
+$user = 'vymkgetnrcudai';
+$pass = 'ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902';
 $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
 // Database
 
