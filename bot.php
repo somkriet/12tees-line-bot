@@ -28,43 +28,15 @@ if ( sizeof($request_array['events']) > 0 ) {
           // $reply_message = 'ทดสอบ';
           $reply_token = $event['replyToken'];
 
-            // switch ($sourceType){
-            //     case 'text':
-            //     switch ($userMessage) {
-            //         case "A":
-            //             $reply_message = "คุณพิมพ์ A";
-            //         break;
-            //         case "B":
-            //             $reply_message = "คุณพิมพ์ B";
-            //         break;
-            //     default:
-            //         $reply_message = "คุณไม่ได้พิมพ์ A และ B";
-            //     break;                                      
-            //     }
-            //     break;
-            // default:
-            //     $reply_message = json_encode($request_array);
-            // break; 
 
+           if ($sourceType = 'text') {
 
-            // $data = [
-            //  'replyToken' => $reply_token,
-            //  'messages' => [
-            //     // ['type' => 'text','text' => json_encode($request_array)]
-            //      ['type' => 'text','text' => $reply_message]
-            //  ]
-            // ];
-
-            // }
-
-           if ($sourceType == 'text') {
-
-                if ($userMessage == 'A') {
+                if ($userMessage = 'A') {
 
                     $reply_message = "คุณพิมพ์ A";
 
                 }
-                elseif($userMessage == 'B'){
+                elseif($userMessage = 'B'){
 
                     $reply_message = "คุณพิมพ์ B";
 
