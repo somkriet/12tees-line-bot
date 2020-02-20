@@ -47,15 +47,21 @@ if ( sizeof($request_array['events']) > 0 ) {
             // break; 
 
             if ($sourceType == 'text') {
+
                 if ($userMessage == 'A') {
+
                     $reply_message = "คุณพิมพ์ A";
+
                 }
-                else if($userMessage == 'B'){
+                elseif($userMessage == 'B'){
+
                     $reply_message = "คุณพิมพ์ B";
+
                 }else{
+                    
                     $reply_message = "คุณไม่ได้พิมพ์ A และ B";
                 }
-                # code...
+           
             }else{
                 $reply_message = json_encode($request_array);
             }
