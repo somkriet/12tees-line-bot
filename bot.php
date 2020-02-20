@@ -25,26 +25,40 @@ if ( sizeof($request_array['events']) > 0 ) {
         $userMessage = $events['events'][0]['message']['text'];
         
         foreach ($request_array['events'] as $event) {
-          $reply_message = 'ทดสอบ';
+          // $reply_message = 'ทดสอบ';
           $reply_token = $event['replyToken'];
 
-            switch ($sourceType){
-                case 'text':
-                switch ($userMessage) {
-                    case "A":
-                        $reply_message = "คุณพิมพ์ A";
-                    break;
-                    case "B":
-                        $reply_message = "คุณพิมพ์ B";
-                    break;
-                default:
+            // switch ($sourceType){
+            //     case 'text':
+            //     switch ($userMessage) {
+            //         case "A":
+            //             $reply_message = "คุณพิมพ์ A";
+            //         break;
+            //         case "B":
+            //             $reply_message = "คุณพิมพ์ B";
+            //         break;
+            //     default:
+            //         $reply_message = "คุณไม่ได้พิมพ์ A และ B";
+            //     break;                                      
+            //     }
+            //     break;
+            // default:
+            //     $reply_message = json_encode($request_array);
+            // break; 
+
+            if ($sourceType == 'text') {
+                if ($userMessage == 'A') {
+                    $reply_message = "คุณพิมพ์ A";
+                }
+                else if($userMessage == 'B'){
+                    $reply_message = "คุณพิมพ์ B";
+                }else{
                     $reply_message = "คุณไม่ได้พิมพ์ A และ B";
-                    break;                                      
+                }
+                # code...
+            }else{
+                $reply_message = json_encode($request_array);
             }
-            break;
-            default:
-            $reply_message = json_encode($request_array);
-            break; 
 
 
             $data = [
