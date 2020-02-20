@@ -22,7 +22,7 @@ if ( sizeof($request_array['events']) > 0 ) {
         $replyToken = $request_array['events'][0]['replyToken'];
         $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
         $sourceType = $request_array['events'][0]['source']['type']; //ชนิดของข้อมูล 
-        $userMessage = $events['events'][0]['message']['text'];
+        $userMessage = $request_array['events'][0]['message']['text'];
         
         foreach ($request_array['events'] as $event) {
           // $reply_message = 'ทดสอบ';
