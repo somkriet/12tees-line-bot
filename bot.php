@@ -25,9 +25,7 @@ $request = file_get_contents('php://input');   // คำสั่งรอรั
 $request_array = json_decode($request, true);   // แปลงข้อความรูปแบบ JSON  ให้อยู่ในโครงสร้างตัวแปร array
 
 
-// {"userId":"Ue27997d1463e20a2dc0928e050c337fe","type":"user"
-
-if ( sizeof($request_array['events']) > 0 ) {
+if (sizeof($request_array['events']) > 0 ) {
 
         $replyToken = $request_array['events'][0]['replyToken'];
         $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
@@ -35,23 +33,10 @@ if ( sizeof($request_array['events']) > 0 ) {
         $userMessage = $request_array['events'][0]['message']['text']; //ข้อความของ user ที่ส่งเข้ามา
         
         foreach ($request_array['events'] as $event) {
-          // $reply_message = 'ทดสอบ';
-          // $reply_token = $event['replyToken'];
+     
+            if ($event['type'] == 'message') {//ตรวจสอบว่า event ที่userส่งมาเป็น type อะไร
 
-
-          // $data = [
-          //    'replyToken' => $reply_token,
-          //    'messages' => [
-          //       // ['type' => 'text','text' => json_encode($request_array)]
-          //        ['type' => 'text','text' => $reply_message]
-          //    ]
-          // ];
-
-
-
-          if ($event['type'] == 'message') {
-
-                        switch($event['message']['type']) {
+                        switch($event['message']['type']) {//ตรวจสอบ ข้อความที่ส่งมา
 
                             case 'text':
                                 // Get replyToken
@@ -59,7 +44,6 @@ if ( sizeof($request_array['events']) > 0 ) {
 
                                 // Reply message
                                 $respMessage = 'Hello, your message is '. $event['message']['text'];
-
 
                                 $data = [
                                      'replyToken' => $reply_token,
@@ -69,57 +53,38 @@ if ( sizeof($request_array['events']) > 0 ) {
                                      ]
                                   ];
 
-                                // $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channel_token);
-                                // $bot = new \LINE\LINEBot($httpClient, array('channelSecret' => $channelSecret));
-
-                                // $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($respMessage);
-                                // $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+                               
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
                                 $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                                 echo "Result: ".$send_result."\r\n";
 
-                                break;
-                        }
-        }
-
-
-          // $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-          // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-          // echo "Result: ".$send_result."\r\n";
-        }
-}
-echo "OK";
-
-
-if (!is_null($request_array['events'])) {
-
-    // Loop through each event
-    foreach ($request_array['events'] as $event) {
-
-                // Line API send a lot of event type, we interested in message only.
-        if ($event['type'] == 'message') {
-
-                        switch($event['message']['type']) {
-
-                            case 'text':
+                            break;
+                            case 'image':
                                 // Get replyToken
-                                $replyToken = $event['replyToken'];
+                                $reply_token = $event['replyToken'];
 
                                 // Reply message
-                                $respMessage = 'Hello, your message is '. $event['message']['text'];
+                                $respMessage = 'Hello, your message is '. 'รูปภาพ';
 
-                                $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channel_token);
-                                $bot = new \LINE\LINEBot($httpClient, array('channelSecret' => $channelSecret));
+                                $data = [
+                                     'replyToken' => $reply_token,
+                                     'messages' => [
+                                        // ['type' => 'text','text' => json_encode($request_array)]
+                                         ['type' => 'text','text' => $respMessage]
+                                     ]
+                                  ];
 
-                                $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($respMessage);
-                                $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+                               
+                                $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                                echo "Result: ".$send_result."\r\n";
 
-                                break;
+                            break;
                         }
-        }
-    }
-}
+            }
 
+        }
+}
 echo "OK";
 
 
