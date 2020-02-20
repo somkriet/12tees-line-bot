@@ -43,7 +43,7 @@ if ( sizeof($request_array['events']) > 0 ) {
             }
             break;
             default:
-            $reply_message = json_encode($events);
+            $reply_message = json_encode($request_array);
 
 
 
