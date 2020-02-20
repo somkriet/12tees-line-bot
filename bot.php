@@ -12,12 +12,15 @@ $channelSecret = '01105a9432439cd39fe7d25592baf0e4';
 // require_once 'bot_setting.php';
 
 // Database
-// $host = 'ec2-3-229-210-93.compute-1.amazonaws.com';
-// $dbname = 'd97j1dos9pi7gj';
-// $user = 'nusytfwxzbezmo';
-// $pass = 'f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831';
-// $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
+$host = 'ec2-3-229-210-93.compute-1.amazonaws.com';
+$dbname = 'd97j1dos9pi7gj';
+$user = 'nusytfwxzbezmo';
+$pass = 'f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831';
+$connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
 // Database
+
+// $db = parse_url(getenv("postgres://nusytfwxzbezmo:f5dd0b912072bed817cea74ec9288b0f34a2aabff759058f6c32acb35f45e831@ec2-3-229-210-93.compute-1.amazonaws.com:5432/d97j1dos9pi7gj"));
+// $db["path"] = ltrim($db["path"], "/");
 
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $channel_token); // เชื่อมต่อกับ LINE Messaging API
 
@@ -31,6 +34,7 @@ if (sizeof($request_array['events']) > 0 ) {
         $userID = $request_array['events'][0]['source']['userId'];  // user id ของคนที่คุยกับบอท
         $sourceType = $request_array['events'][0]['source']['type']; //ชนิดของข้อมูล 
         $userMessage = $request_array['events'][0]['message']['text']; //ข้อความของ user ที่ส่งเข้ามา
+
 
         foreach ($request_array['events'] as $event) {
      
@@ -53,6 +57,12 @@ if (sizeof($request_array['events']) > 0 ) {
                                          ['type' => 'text','text' => $respMessage]
                                      ]
                                   ];
+
+                                  $params = array(
+                                      'log' => $event['message']['text'],
+                                  );
+                                  $statement = $connection->prepare("INSERT INTO logs (log) VALUES (:log)");
+                                  $result = $statement->execute($params);
 
                                
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
