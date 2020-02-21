@@ -19,8 +19,8 @@ $pass = 'ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902';
 $connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
 // Database
 
-$db = parse_url(getenv("postgres://vymkgetnrcudai:ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902@ec2-3-229-210-93.compute-1.amazonaws.com:5432/dbud41ic7prd1b"));
-$db["db"] = ltrim($db["db"], "/");
+// $db = parse_url(getenv("postgres://vymkgetnrcudai:ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902@ec2-3-229-210-93.compute-1.amazonaws.com:5432/dbud41ic7prd1b"));
+// $db["db"] = ltrim($db["db"], "/");
 
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $channel_token); // เชื่อมต่อกับ LINE Messaging API
 
@@ -48,7 +48,15 @@ if (sizeof($request_array['events']) > 0 ) {
                                 $reply_token = $event['replyToken'];
 
                                 // Reply message
-                                $respMessage = 'Hello, your message is '. $event['message']['text'];
+                                // $respMessage = 'Hello, your message is '. $event['message']['text'];
+
+                                $multi = $event['message']['text']; 
+                                // echo "<centre>สูครคูณแม่ $multi <br>"; 
+                                for($i=1;$i<=12;$i++) 
+                                { 
+                                // echo "$i x $multi = ".$i*$multi. "<br>"; 
+
+                                $respMessage = 'สูตรคูณแม่' . $event['message']['text'] . ' $i x $multi = '.$i*$multi '<br>';
 
                                 $data = [
                                      'replyToken' => $reply_token,
