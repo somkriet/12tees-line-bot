@@ -63,7 +63,19 @@ if (sizeof($request_array['events']) > 0 ) {
                                    
                                 for($i=1;$i<=12;$i++) 
                                 { 
-                                    $respMessage = $i .'x'. $multi .'='.$i*$multi; 
+                                    $respMessage = $i .'x'. $multi .'='.$i*$multi;
+                                    
+                                     $data = [
+                                     'replyToken' => $reply_token,
+                                     'messages' => [
+                                        // ['type' => 'text','text' => json_encode($request_array)]
+                                         ['type' => 'text','text' => $respMessage]
+                                     ]
+                                    ];
+
+                                $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                                echo "Result: ".$send_result."\r\n"; 
 
                                 } 
 
@@ -82,17 +94,17 @@ if (sizeof($request_array['events']) > 0 ) {
                                   // $statement = $connection->prepare("INSERT INTO logs (log) VALUES (:log)");
                                   // $result = $statement->execute($params);
 
-                                $data = [
-                                     'replyToken' => $reply_token,
-                                     'messages' => [
-                                        // ['type' => 'text','text' => json_encode($request_array)]
-                                         ['type' => 'text','text' => $respMessage]
-                                     ]
-                                    ];
+                                // $data = [
+                                //      'replyToken' => $reply_token,
+                                //      'messages' => [
+                                //         // ['type' => 'text','text' => json_encode($request_array)]
+                                //          ['type' => 'text','text' => $respMessage]
+                                //      ]
+                                //     ];
 
-                                $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-                                echo "Result: ".$send_result."\r\n";
+                                // $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+                                // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                                // echo "Result: ".$send_result."\r\n";
                                 
 
                             break;
