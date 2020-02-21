@@ -59,7 +59,7 @@ if (sizeof($request_array['events']) > 0 ) {
                                 //   ];
 
 
-                                $multi = $event['message']['text']; 
+                                $multi = $event['message']['text']*5; 
                                    
                                 // for($i=1;$i<=12;$i++) 
                                 // { 
