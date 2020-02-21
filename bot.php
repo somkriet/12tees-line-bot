@@ -60,11 +60,23 @@ if (sizeof($request_array['events']) > 0 ) {
 
 
                                 $multi = $event['message']['text']; 
-                                $i1=5;   
-                                $i2=6;
+                                $i1=1;$i2=2;$i3=3;$i4=4;$i5=5;$i6=6;$i7=7;$i8=8;$i9=9;$i10=10;$i11=11;$i12=12;   
+                                
                                 // for($i=1;$i<=12;$i++) 
                                 // { 
-                                    $respMessage = $i1 .'x'. $multi .'='.$i1*$multi.','.$i2 .'x'. $multi .'='.$i2*$multi;
+                                    $respMessage ='แม่สูตรคูณ แม่'.$multi."\n"
+                                                  .$i1 .'x'. $multi .'='.$i1*$multi."\n"
+                                                  .$i2 .'x'. $multi .'='.$i2*$multi."\n"
+                                                  .$i3 .'x'. $multi .'='.$i3*$multi."\n"
+                                                  .$i4 .'x'. $multi .'='.$i4*$multi."\n"
+                                                  .$i5 .'x'. $multi .'='.$i5*$multi."\n"
+                                                  .$i6 .'x'. $multi .'='.$i6*$multi."\n"
+                                                  .$i7 .'x'. $multi .'='.$i7*$multi."\n"
+                                                  .$i8 .'x'. $multi .'='.$i8*$multi."\n"
+                                                  .$i9 .'x'. $multi .'='.$i9*$multi."\n"
+                                                  .$i10 .'x'. $multi .'='.$i10*$multi."\n"
+                                                  .$i11 .'x'. $multi .'='.$i11*$multi."\n"
+                                                  .$i12 .'x'. $multi .'='.$i12*$multi;
 
                                     $data = [
                                      'replyToken' => $reply_token,
