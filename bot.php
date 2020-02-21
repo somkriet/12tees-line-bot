@@ -59,29 +59,33 @@ if (sizeof($request_array['events']) > 0 ) {
                                 //   ];
 
 
-                                $multi = $event['message']['text']*5; 
+                                $multi = $event['message']['text']; 
                                    
-                                // for($i=1;$i<=12;$i++) 
-                                // { 
-                                //     $respMessage = $i .'x'. $multi = .$i*$multi; 
+                                for($i=1;$i<=12;$i++) 
+                                { 
+                                    $respMessage = $i .'x'. $multi = .$i*$multi; 
 
-                                //     $data = [
+                                    $data = [
+                                     'replyToken' => $reply_token,
+                                     'messages' => [
+                                        // ['type' => 'text','text' => json_encode($request_array)]
+                                         ['type' => 'text','text' => $respMessage]
+                                     ]
+                                    ];
+
+                                    $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+                                    $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                                    echo "Result: ".$send_result."\r\n";
+                                } 
+
+
+                                // $data = [
                                 //      'replyToken' => $reply_token,
                                 //      'messages' => [
                                 //         // ['type' => 'text','text' => json_encode($request_array)]
                                 //          ['type' => 'text','text' => $respMessage]
                                 //      ]
                                 //     ];
-                                // } 
-
-
-                                $data = [
-                                     'replyToken' => $reply_token,
-                                     'messages' => [
-                                        // ['type' => 'text','text' => json_encode($request_array)]
-                                         ['type' => 'text','text' => $multi]
-                                     ]
-                                    ];
 
                                   // $params = array(
                                   //     'log' => $event['message']['text'],
@@ -90,9 +94,7 @@ if (sizeof($request_array['events']) > 0 ) {
                                   // $result = $statement->execute($params);
 
                                
-                                $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-                                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-                                echo "Result: ".$send_result."\r\n";
+                                
 
                             break;
                             case 'image':
