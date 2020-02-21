@@ -67,11 +67,11 @@ if (sizeof($request_array['events']) > 0 ) {
                                      ]
                                   ];
 
-                                  $params = array(
-                                      'log' => $event['message']['text'],
-                                  );
-                                  $statement = $connection->prepare("INSERT INTO logs (log) VALUES (:log)");
-                                  $result = $statement->execute($params);
+                                  // $params = array(
+                                  //     'log' => $event['message']['text'],
+                                  // );
+                                  // $statement = $connection->prepare("INSERT INTO logs (log) VALUES (:log)");
+                                  // $result = $statement->execute($params);
 
                                
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
