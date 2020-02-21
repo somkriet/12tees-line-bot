@@ -50,23 +50,13 @@ if (sizeof($request_array['events']) > 0 ) {
                                 // Reply message
                                 $respMessage = 'Hello, your message is '. $event['message']['text'];
 
-                                // $multi = $event['message']['text']; 
-    
-                                // for($i=1;$i<=12;$i++) 
-                                // { 
-                        
-                                //     $respMessage = 'สูตรคูณ'. $i .'x'. $multi '=' .$i*$multi;
-                                //     $data = [
-                                //      'replyToken' => $reply_token,
-                                //      'messages' => [
-                                //         // ['type' => 'text','text' => json_encode($request_array)]
-                                //          ['type' => 'text','text' => $respMessage]
-                                //      ]
-                                //   ];
-
-                                // }
-
-                                
+                                $data = [
+                                     'replyToken' => $reply_token,
+                                     'messages' => [
+                                        // ['type' => 'text','text' => json_encode($request_array)]
+                                         ['type' => 'text','text' => $respMessage]
+                                     ]
+                                  ];
 
                                   // $params = array(
                                   //     'log' => $event['message']['text'],
