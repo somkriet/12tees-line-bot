@@ -64,7 +64,7 @@ if (sizeof($request_array['events']) > 0 ) {
                                 $i2=6;
                                 // for($i=1;$i<=12;$i++) 
                                 // { 
-                                    $respMessage = $i1 .'x'. $multi .'='.$i1*$multi','$i2 .'x'. $multi .'='.$i2*$multi;
+                                    $respMessage = $i1 .'x'. $multi .'='.$i1*$multi.','.$i2 .'x'. $multi .'='.$i2*$multi;
 
                                     $data = [
                                      'replyToken' => $reply_token,
