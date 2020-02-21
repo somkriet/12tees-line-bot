@@ -62,7 +62,7 @@ if (sizeof($request_array['events']) > 0 ) {
                                 $multi = $event['message']['text']; 
                                 $i1=1;$i2=2;$i3=3;$i4=4;$i5=5;$i6=6;$i7=7;$i8=8;$i9=9;$i10=10;$i11=11;$i12=12;   
                                     $respMessage ='แม่สูตรคูณ แม่'.$multi."\n"
-                                                  $multi.'x'.$i1.'='.$i1*$multi."\n"
+                                                  .$multi.'x'.$i1.'='.$i1*$multi."\n"
                                                   $multi.'x'.$i2.'='.$i2*$multi."\n"
                                                   $multi.'x'.$i3.'='.$i3*$multi."\n"
                                                   $multi.'x'.$i4.'='.$i4*$multi."\n"
