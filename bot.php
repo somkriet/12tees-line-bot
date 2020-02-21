@@ -60,19 +60,28 @@ if (sizeof($request_array['events']) > 0 ) {
 
 
                                 $multi = $event['message']['text']; 
-                                    // echo "<centre>สูครคูณแม่ $multi <br>"; 
-                                for($i=1;$i<=12;$i++) 
-                                { 
-                                    $respMessage = $i .'x'. $multi = .$i*$multi; 
+                                   
+                                // for($i=1;$i<=12;$i++) 
+                                // { 
+                                //     $respMessage = $i .'x'. $multi = .$i*$multi; 
 
-                                    $data = [
+                                //     $data = [
+                                //      'replyToken' => $reply_token,
+                                //      'messages' => [
+                                //         // ['type' => 'text','text' => json_encode($request_array)]
+                                //          ['type' => 'text','text' => $respMessage]
+                                //      ]
+                                //     ];
+                                // } 
+
+
+                                $data = [
                                      'replyToken' => $reply_token,
                                      'messages' => [
                                         // ['type' => 'text','text' => json_encode($request_array)]
-                                         ['type' => 'text','text' => $respMessage]
+                                         ['type' => 'text','text' => $multi]
                                      ]
                                     ];
-                                } 
 
                                   // $params = array(
                                   //     'log' => $event['message']['text'],
