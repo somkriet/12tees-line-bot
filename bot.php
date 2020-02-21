@@ -56,7 +56,7 @@ if (sizeof($request_array['events']) > 0 ) {
                                 { 
                                 // echo "$i x $multi = ".$i*$multi. "<br>"; 
 
-                                $respMessage = 'สูตรคูณแม่' . $event['message']['text'] . ' $i x $multi = '.$i*$multi '<br>';
+                                $respMessage = 'สูตรคูณ'. $i .'x'. $multi '=' .$i*$multi;
                                 }
 
                                 $data = [
