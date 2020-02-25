@@ -27,16 +27,6 @@ $channelSecret = '01105a9432439cd39fe7d25592baf0e4';
 // การตั้งเกี่ยวกับ bot
 // require_once 'bot_setting.php';
 
-// Database
-$host = 'ec2-3-229-210-93.compute-1.amazonaws.com';
-$dbname = 'dbud41ic7prd1b';
-$user = 'vymkgetnrcudai';
-$pass = 'ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902';
-$connection = new PDO("pgsql:host=$host;dbname=$dbname", $user, $pass);
-// Database
-
-// $db = parse_url(getenv("postgres://vymkgetnrcudai:ffc3459e10c05dbc1a0f7a51058eec466302af9c07a874f74944d4d4b9790902@ec2-3-229-210-93.compute-1.amazonaws.com:5432/dbud41ic7prd1b"));
-// $db["db"] = ltrim($db["db"], "/");
 
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $channel_token); // เชื่อมต่อกับ LINE Messaging API
 
@@ -274,27 +264,6 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 } 
 
-// function send_reply_message_img($url, $post_header, $post_body,$msg_id)
-// {
-//     $ch = curl_init($url);
-//     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//     curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
-//     curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
-//     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-//     $result = curl_exec($ch);
-//     curl_close($ch);
-
-//     $fp = 'botdata/'.$msg_id.'.png';
-//     $url_img="http://103.40.151.6/line_bot_gts_issue/".$fp;
-//     file_put_contents( $fp, $data );
-
-// //     $fp = ‘img_file/’.$msg_id.’.png’;
-// // $url_img=”http://103.40.151.6/line_bot_gts_issue/”.$fp;
-// // file_put_contents( $fp, $data );
-
-//     return $result;
-// } 
 
 
 ?>
