@@ -1,17 +1,17 @@
 <?php
 
-$servername = "12tees-rds.cyprrbnhl6mt.ap-southeast-1.rds.amazonaws.com";
-$username = "jay";
-$password = "jay123$";
-$databaseName = "12tees";
+// $servername = "12tees-rds.cyprrbnhl6mt.ap-southeast-1.rds.amazonaws.com";
+// $username = "jay";
+// $password = "jay123$";
+// $databaseName = "12tees";
 
-$connect = new mysqli($servername,$username,$password,$databaseName);
+// $connect = new mysqli($servername,$username,$password,$databaseName);
 
-if ($connect->connect_error) {
-    die("Connection failed: " . $connect->connect_error);
-} 
+// if ($connect->connect_error) {
+//     die("Connection failed: " . $connect->connect_error);
+// } 
 
-echo "Connected successfully";
+// echo "Connected successfully";
 
 
 
