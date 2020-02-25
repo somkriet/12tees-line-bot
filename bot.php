@@ -2,9 +2,9 @@
 
 require_once('./vendor/autoload.php');
 
-$servername = "localhost";
-$username = "missprem_crm";
-$password = "12qwaszx";
+$servername = "12tees-rds.cyprrbnhl6mt.ap-southeast-1.rds.amazonaws.com";
+$username = "jay";
+$password = "jay123$";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password);
