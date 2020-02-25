@@ -1,22 +1,21 @@
 <?php
 
-require_once('./vendor/autoload.php');
-
 $servername = "12tees-rds.cyprrbnhl6mt.ap-southeast-1.rds.amazonaws.com";
 $username = "jay";
 $password = "jay123$";
+$databaseName = "12tees";
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password);
+$connect = new mysqli($servername,$username,$password,$databaseName);
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+if ($connect->connect_error) {
+    die("Connection failed: " . $connect->connect_error);
+} 
+
 echo "Connected successfully";
 
 
 
+require_once('./vendor/autoload.php');
 
 $API_URL = 'https://api.line.me/v2/bot/message';
 
