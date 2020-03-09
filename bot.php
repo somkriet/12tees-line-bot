@@ -53,40 +53,40 @@ if (sizeof($request_array['events']) > 0 ) {
                                 $reply_token = $event['replyToken'];
 
                                 // Reply message
-                                // $respMessage = 'Hello, your message is '. $event['message']['text'];
+                                $respMessage = 'Hello, your message is '. $event['message']['text'];
 
-                                // $data = [
-                                //      'replyToken' => $reply_token,
-                                //      'messages' => [
-                                //         // ['type' => 'text','text' => json_encode($request_array)]
-                                //          ['type' => 'text','text' => $respMessage]
-                                //      ]
-                                //   ];
-
-
-                                $multi = $event['message']['text']; 
-                                $i1=1;$i2=2;$i3=3;$i4=4;$i5=5;$i6=6;$i7=7;$i8=8;$i9=9;$i10=10;$i11=11;$i12=12;   
-                                    $respMessage ='แม่สูตรคูณ แม่'.$multi."\n"
-                                                  .$multi.'x'.$i1.'='.$i1*$multi."\n"
-                                                  .$multi.'x'.$i2.'='.$i2*$multi."\n"
-                                                  .$multi.'x'.$i3.'='.$i3*$multi."\n"
-                                                  .$multi.'x'.$i4.'='.$i4*$multi."\n"
-                                                  .$multi.'x'.$i5.'='.$i5*$multi."\n"
-                                                  .$multi.'x'.$i6.'='.$i6*$multi."\n"
-                                                  .$multi.'x'.$i7.'='.$i7*$multi."\n"
-                                                  .$multi.'x'.$i8.'='.$i8*$multi."\n"
-                                                  .$multi.'x'.$i9.'='.$i9*$multi."\n"
-                                                  .$multi.'x'.$i10.'='.$i10*$multi."\n"
-                                                  .$multi.'x'.$i11.'='.$i11*$multi."\n"
-                                                  .$multi.'x'.$i12.'='.$i12*$multi;
-
-                                    $data = [
+                                $data = [
                                      'replyToken' => $reply_token,
                                      'messages' => [
                                         // ['type' => 'text','text' => json_encode($request_array)]
                                          ['type' => 'text','text' => $respMessage]
                                      ]
-                                    ];
+                                  ];
+
+
+                                // $multi = $event['message']['text']; 
+                                // $i1=1;$i2=2;$i3=3;$i4=4;$i5=5;$i6=6;$i7=7;$i8=8;$i9=9;$i10=10;$i11=11;$i12=12;   
+                                //     $respMessage ='แม่สูตรคูณ แม่'.$multi."\n"
+                                //                   .$multi.'x'.$i1.'='.$i1*$multi."\n"
+                                //                   .$multi.'x'.$i2.'='.$i2*$multi."\n"
+                                //                   .$multi.'x'.$i3.'='.$i3*$multi."\n"
+                                //                   .$multi.'x'.$i4.'='.$i4*$multi."\n"
+                                //                   .$multi.'x'.$i5.'='.$i5*$multi."\n"
+                                //                   .$multi.'x'.$i6.'='.$i6*$multi."\n"
+                                //                   .$multi.'x'.$i7.'='.$i7*$multi."\n"
+                                //                   .$multi.'x'.$i8.'='.$i8*$multi."\n"
+                                //                   .$multi.'x'.$i9.'='.$i9*$multi."\n"
+                                //                   .$multi.'x'.$i10.'='.$i10*$multi."\n"
+                                //                   .$multi.'x'.$i11.'='.$i11*$multi."\n"
+                                //                   .$multi.'x'.$i12.'='.$i12*$multi;
+
+                                //     $data = [
+                                //      'replyToken' => $reply_token,
+                                //      'messages' => [
+                                //         // ['type' => 'text','text' => json_encode($request_array)]
+                                //          ['type' => 'text','text' => $respMessage]
+                                //      ]
+                                //     ];
                               
                                 $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
                                 $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
